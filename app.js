@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import reservationRouter from "./routes/reservationRoute.js";
+import { errorMiddleware } from "./middleware/error.js";
 
 
 
@@ -21,6 +22,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 app.use("api/v1/reservations", reservationRouter)
+
+app.use(errorMiddleware);
 
 
 
