@@ -13,10 +13,14 @@ const timeSlotSchema = new mongoose.Schema(
     people: {
         type: Number,
         required: true
-    }
+    },
+    email: {
+        type: String,
+        required: true,
+        validate: [validator.isEmail, "Provide a valid email"],
+        }
 },
     {timestamps : true}
-
 ); 
 
 export default mongoose.model("TimeSlot", timeSlotSchema);
