@@ -4,10 +4,14 @@ import {
   getTimeSlots,
   getTimeSlotsByEmail,
   updateTimeSlot,
-  deleteTimeSlot
+  deleteTimeSlot,
+  createTimeSlots
 } from '../controller/timeslot.js';
 
 const router = express.Router();
+
+//  find timeslot
+router.post('/create-slots', createTimeSlots);
 
 //  create a new TimeSlot
 router.post('/timeslots', createTimeSlot);

@@ -3,8 +3,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import timeSlotRoutes from "./routes/timeSlotRoutes.js"
 import timeSlotRouter from './routes/timeSlotRoutes.js'
-import reservationRouter from "./routes/reservationRoute.js";
+import reservationRoute from "./routes/reservationRoute.js";
 import { errorMiddleware } from "./middleware/error.js";
 
 
@@ -27,8 +28,9 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
+app.use('/api/timeslots', timeSlotRoutes)
 app.use('/api', timeSlotRouter);
-app.post("api/v1/reservation", reservationRouter);
+app.post("api/v1/reservation", reservationRoute);
 
 
   

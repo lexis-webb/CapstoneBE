@@ -1,6 +1,27 @@
 import TimeSlot from "../models/timeslotSchema.js";
 import { slots } from "../data.js";
 
+export const createTimeSlots = async (req, res) => {
+    try {
+      // Loop through the slots and create documents in MongoDB
+      const timeSlots = slots.map(slot => ({ slot }));
+  
+      // Insert all time slots into the MongoDB collection
+      await TimeSlot.insertMany(timeSlots);
+  
+      res.status(201).json({
+        success: true,
+        message: 'Time slots added successfully!',
+        data: timeSlots,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Failed to add time slots',
+        error: error.message,
+      });
+    }
+  };
 export const createTimeSlot = async (req, res, next) => {
     const { date, slot, people, email } = req.body;
   
@@ -27,20 +48,6 @@ export const createTimeSlot = async (req, res, next) => {
     }
   };
 
-  export const getAllTimeSlots = async (req, res, next) => {
-    try {
-      // Fetch all time slots
-      const timeSlots = await TimeSlot.find();
-  
-      // Return the time slots in the response
-      res.status(200).json({
-        success: true,
-        data: timeSlots
-      });
-    } catch (error) {
-      next(error);  // Handle any errors
-    }
-  };
   export const getTimeSlots = async (req, res, next) => {
     try {
       // Fetch all time slots
@@ -55,6 +62,7 @@ export const createTimeSlot = async (req, res, next) => {
       next(error);  // Handle any errors
     }
   };
+
   export const getTimeSlotsByEmail = async (req, res, next) => {
     const { email } = req.params;  // Get email from URL parameters
   
@@ -110,28 +118,29 @@ export const createTimeSlot = async (req, res, next) => {
     }
   };
   export const deleteTimeSlot = async (req, res, next) => {
-  const { id } = req.params;  // Get the ID from the URL parameters
-
-  try {
-    // Find the time slot by ID and delete it
-    const deletedTimeSlot = await TimeSlot.findByIdAndDelete(id);
-
-    // If no time slot is found, return 404
-    if (!deletedTimeSlot) {
-      return res.status(404).json({
-        success: false,
-        message: "TimeSlot not found"
+    const { id } = req.params;  // Get the ID from the URL parameters
+  
+    try {
+      // Find the time slot by ID and delete it
+      const deletedTimeSlot = await TimeSlot.findByIdAndDelete(id);
+  
+      // If no time slot is found, return 404
+      if (!deletedTimeSlot) {
+        return res.status(404).json({
+          success: false,
+          message: "TimeSlot not found"
+        });
+      }
+  
+      // Send success response
+      res.status(200).json({
+        success: true,
+        message: "TimeSlot deleted successfully"
       });
+    } catch (error) {
+      next(error);  // Handle any errors
     }
-
-    // Send success response
-    res.status(200).json({
-      success: true,
-      message: "TimeSlot deleted successfully"
-    });
-  } catch (error) {
-    next(error);  // Handle any errors
-  }
-};
-
+  };
+  
+  
   
