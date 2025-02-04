@@ -1,24 +1,24 @@
-import ErrorHandler from "../middleware/error.js";
 import { Reservation } from "../models/reservationSchemas.js"
 
-export const send_reservation = async (reg, res, next) => {
-const { firstName, lastName, email, phone, date, time } = req.body;
-if (!firstName || !lastName || !email || !phone || !date || !time) {
-return next(new ErrorHandler ("Please fill full reservation form!", 400));
-}
-try {
-    await Reservation.create(firstName, lastName, email, phone, date, time);
-    res.status(200).json({
-    success: true,
-    message: "Reservation Sent Successfully!",
-});
-} catch (error) {
-if(error.name === "ValidationError") {
-    const validationErrors = Object.values(error.errors).map(
-        (err) => err .message
-    );
-    return next(new ErrorHandler(validationErrors.join(" , "), 400));
+export const createReservation = async (req, res) => {
+    const { firstName, lastName, email, date, time, phone } = req.body;
+  
+    // Validate request data
+    if (!firstName || !lastName || !email || !date || !time || !phone) {
+      return res.status(400).json({ message: "Please fill in all fields." });
     }
-    return next(error);
+  
+    try {
+      const reservation = await Reservation.create({ firstName, lastName, email, date, time, phone });
+      res.status(201).json({
+        success: true,
+        message: "Reservation created successfully!",
+        reservation,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
-}
+  };
