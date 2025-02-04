@@ -28,9 +28,9 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
-app.use('/api/timeslots', timeSlotRoutes)
+// app.use('/api/timeslots', timeSlotRoutes)
 app.use('/api', timeSlotRouter);
-app.post("api/v1/reservation", reservationRoute);
+app.use("api/reservations", timeSlotRouter);
 
 
   

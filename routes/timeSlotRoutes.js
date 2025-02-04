@@ -7,6 +7,7 @@ import {
   deleteTimeSlot,
   createTimeSlots
 } from '../controller/timeslot.js';
+import { createReservation } from '../controller/reservation.js';
 
 const router = express.Router();
 
@@ -27,5 +28,7 @@ router.put('/timeslots/:id', updateTimeSlot);
 
 //  delete a TimeSlot by ID
 router.delete('/timeslots/:id', deleteTimeSlot);
+
+router.post('/createReservation', createReservation);
 
 export default router;
