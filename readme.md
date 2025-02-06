@@ -1,3 +1,4 @@
 This is my backend file for my capstone project.
 
-I have create full CRUD routes that can be accesed from the front end/backend to create a restaraunt booking app.
+I have created full CRUD routes to get, post, put, delete on the reservation pages that can be accesed from the front end/backend to create a reservation.
+
