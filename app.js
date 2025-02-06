@@ -20,17 +20,24 @@ mongoose.connect(process.env.MONGO_URL, {})
       console.error('Error connecting to MongoDB', err);
     });
 
-app.use(cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ["POST"],
-    credentials: true,
-}));
+app.use(cors());
+
+const corsOptions = {
+    origin: 'http://localhost:5173', // Allow requests from localhost:5173
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods (you can add more if needed)
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  };
+
+  app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 // app.use('/api/timeslots', timeSlotRoutes)
-app.use('/api', timeSlotRouter);
-app.use("api/reservations", timeSlotRouter);
+// app.use('/', timeSlotRouter);
+app.get('/getData', (req, res) => {
+    res.send("HELLO");
+});
+app.use("/reservations", timeSlotRouter);
 
 
   
@@ -39,9 +46,9 @@ app.use("api/reservations", timeSlotRouter);
 app.use(errorMiddleware);
 
 
-app.get("/", (req, res) => {
-    res.send("Express App is running")
-});
+// app.get("/", (req, res) => {
+//     res.send("Express App is running")
+// });
 
 
 app.listen(PORT, () => {
