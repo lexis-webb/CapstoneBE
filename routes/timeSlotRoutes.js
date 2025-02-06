@@ -26,7 +26,7 @@ router.get('/timeslots/email/:email', getTimeSlotsByEmail);
 //  update a TimeSlot by ID
 router.put('/timeslots/edit', updateTimeSlot);
 
-//  delete a TimeSlot by ID
+//  delete a TimeSlot 
 router.delete('/timeslots/delete', deleteTimeSlot);
 
 

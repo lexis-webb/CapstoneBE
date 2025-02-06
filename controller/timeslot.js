@@ -124,29 +124,26 @@ export const createTimeSlot = async (req, res, next) => {
     }
   };
   export const deleteTimeSlot = async (req, res, next) => {
-    const { id } = req.params;  // Get the ID from the URL parameters
-  
     try {
-      // Find the time slot by ID and delete it
-      const deletedTimeSlot = await TimeSlot.findByIdAndDelete(id);
+      // Delete the first time slot (no criteria, just the first one it finds)
+      const deletedTimeSlot = await TimeSlot.findOneAndDelete();
   
-      // If no time slot is found, return 404
+      // If no time slot was deleted, return a 404 error
       if (!deletedTimeSlot) {
         return res.status(404).json({
           success: false,
-          message: "TimeSlot not found"
+          message: 'No time slot found to delete.'
         });
       }
   
-      // Send success response
+      // Send success response if deletion is successful
       res.status(200).json({
         success: true,
-        message: "TimeSlot deleted successfully"
+        message: 'TimeSlot deleted successfully.'
       });
     } catch (error) {
       next(error);  // Handle any errors
     }
   };
-  
   
   

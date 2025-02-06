@@ -21,7 +21,7 @@ const timeSlotSchema = new mongoose.Schema(
           validate: [validator.isEmail, "Provide a valid email"],
         },
       },
-      { timestamps: true }
+    //   { timestamps: true }
     );
 
 export default mongoose.model("TimeSlot", timeSlotSchema);
