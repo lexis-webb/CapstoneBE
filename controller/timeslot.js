@@ -3,25 +3,31 @@ import { slots } from "../data.js";
 
 export const createTimeSlots = async (req, res) => {
     try {
-      // Loop through the slots and create documents in MongoDB
-      const timeSlots = slots.map(slot => ({ slot }));
-  
-      // Insert all time slots into the MongoDB collection
-      await TimeSlot.insertMany(timeSlots);
-  
-      res.status(201).json({
-        success: true,
-        message: 'Time slots added successfully!',
-        data: timeSlots,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: 'Failed to add time slots',
-        error: error.message,
-      });
-    }
-  };
+        const { date, slot, people, email } = req.body;
+        
+        if (!date || !slot || !people || !email) {
+          return res.status(400).json({ message: 'All fields are required' });
+        }
+    
+        const newSlot = new TimeSlot({
+          date,
+          slot,
+          people,
+          email
+        });
+    
+        await newSlot.save();
+    
+        res.status(201).json({
+          message: 'TimeSlot created successfully',
+          data: newSlot,
+        });
+    
+      } catch (error) {
+        console.error("Error creating reservation:", error);  // Log the error on
+      }}
+    
+    
 export const createTimeSlot = async (req, res, next) => {
     const { date, slot, people, email } = req.body;
   

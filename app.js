@@ -29,12 +29,17 @@ const corsOptions = {
   };
 
   app.use(cors(corsOptions));
+  app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;");
+    next();
+  });
+  
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 // app.use('/api/timeslots', timeSlotRoutes)
 // app.use('/', timeSlotRouter);
-app.get('/getData', (req, res) => {
+app.get('/', (req, res) => {
     res.send("HELLO");
 });
 app.use("/reservations", timeSlotRouter);
@@ -51,7 +56,7 @@ app.use(errorMiddleware);
 // });
 
 
-app.listen(PORT, () => {
+app.listen(4000, () => {
     console.log(`Server is running on port: ${PORT}`);
   });
 

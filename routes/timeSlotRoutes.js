@@ -29,6 +29,5 @@ router.put('/timeslots/:id', updateTimeSlot);
 //  delete a TimeSlot by ID
 router.delete('/timeslots/:id', deleteTimeSlot);
 
-router.post('/createReservation', createReservation);
 
 export default router;

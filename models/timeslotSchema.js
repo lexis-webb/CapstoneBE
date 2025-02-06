@@ -20,14 +20,6 @@ const timeSlotSchema = new mongoose.Schema(
           required: true,
           validate: [validator.isEmail, "Provide a valid email"],
         },
-        status: {
-          type: String,
-          enum: ["available", "booked", "pending"], 
-        },
-        notes: {
-          type: String,
-          trim: true, 
-        },
       },
       { timestamps: true }
     );
