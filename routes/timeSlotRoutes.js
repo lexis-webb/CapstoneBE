@@ -7,7 +7,7 @@ import {
   deleteTimeSlot,
   createTimeSlots
 } from '../controller/timeslot.js';
-import { createReservation } from '../controller/reservation.js';
+
 
 const router = express.Router();
 

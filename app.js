@@ -3,9 +3,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import timeSlotRoutes from "./routes/timeSlotRoutes.js"
 import timeSlotRouter from './routes/timeSlotRoutes.js'
-import reservationRoute from "./routes/reservationRoute.js";
+
 import { errorMiddleware } from "./middleware/error.js";
 
 
