@@ -18,16 +18,16 @@ router.post('/create-slots', createTimeSlots);
 router.post('/timeslots', createTimeSlot);
 
 //  get all TimeSlots
-router.get('/timeslots', getTimeSlots);
+router.get('/timeslot', getTimeSlots);
 
 //  get TimeSlots by email
 router.get('/timeslots/email/:email', getTimeSlotsByEmail);
 
 //  update a TimeSlot by ID
-router.put('/timeslots/:id', updateTimeSlot);
+router.put('/timeslots/edit', updateTimeSlot);
 
 //  delete a TimeSlot by ID
-router.delete('/timeslots/:id', deleteTimeSlot);
+router.delete('/timeslots/delete', deleteTimeSlot);
 
 
 export default router;
