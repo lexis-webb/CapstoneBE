@@ -12,6 +12,8 @@
 </ul><ul>
 <li>JavaScript</li>
 </ul><ul>
+<li>NodeJS</li>
+</ul><ul>
 <li>React</li>
 </ul><h2>Setup</h2>
 <hr><p>The dependencies used are cors, dotenv, express, mongodb, mongoose, and validator.</p><h5>Steps</h5><ul>
